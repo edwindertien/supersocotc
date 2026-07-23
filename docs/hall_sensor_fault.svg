@@ -1,0 +1,82 @@
+<svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Consolas,monospace">
+  <rect width="760" height="420" fill="#1A1C1E"/>
+  <text x="380" y="34" text-anchor="middle" fill="#F0A500" font-size="15" font-weight="bold">Bosch Hub Motor — Hall Sensor Fault Diagnosis</text>
+  <text x="380" y="52" text-anchor="middle" fill="#6B7280" font-size="10">Error E96 (Hall sensor error) · Yellow channel shorted to GND (100Ω) · Wrong sensor orientation after reassembly</text>
+
+  <!-- 6-wire connector -->
+  <rect x="40" y="90" width="160" height="220" rx="8" fill="#23262A" stroke="#2E3238" stroke-width="1.5"/>
+  <text x="120" y="112" text-anchor="middle" fill="#6B7280" font-size="10" font-weight="bold">Hall connector (6-pin)</text>
+
+  <!-- Pin rows -->
+  <rect x="55" y="122" width="130" height="24" rx="4" fill="#2E3238"/>
+  <text x="120" y="138" text-anchor="middle" fill="#3DCC7E" font-size="10">+5V supply</text>
+
+  <rect x="55" y="152" width="130" height="24" rx="4" fill="#2E3238"/>
+  <text x="120" y="168" text-anchor="middle" fill="#6B7280" font-size="10">GND</text>
+
+  <rect x="55" y="182" width="130" height="24" rx="4" fill="#2E3238"/>
+  <text x="120" y="198" text-anchor="middle" fill="#3DCC7E" font-size="10">Yellow ✓ repaired</text>
+
+  <rect x="55" y="212" width="130" height="24" rx="4" fill="#2E3238"/>
+  <text x="120" y="228" text-anchor="middle" fill="#3DCC7E" font-size="10">Blue ✓ ok</text>
+
+  <rect x="55" y="242" width="130" height="24" rx="4" fill="#2E3238"/>
+  <text x="120" y="258" text-anchor="middle" fill="#3DCC7E" font-size="10">Green ✓ ok</text>
+
+  <rect x="55" y="272" width="130" height="24" rx="4" fill="#2E3238"/>
+  <text x="120" y="288" text-anchor="middle" fill="#6B7280" font-size="10">White (thermistor)</text>
+
+  <!-- Signal diagram -->
+  <rect x="240" y="90" width="480" height="220" rx="8" fill="#23262A" stroke="#2E3238" stroke-width="1.5"/>
+  <text x="480" y="112" text-anchor="middle" fill="#6B7280" font-size="10" font-weight="bold">Hall signal waveforms (motor spinning slowly)</text>
+
+  <!-- Time axis -->
+  <line x1="260" y1="290" x2="700" y2="290" stroke="#2E3238" stroke-width="1"/>
+  <text x="700" y="302" fill="#6B7280" font-size="8">time →</text>
+
+  <!-- Blue channel - good -->
+  <text x="255" y="148" fill="#4A9EFF" font-size="9">Blue</text>
+  <polyline points="270,160 310,160 310,130 390,130 390,160 470,160 470,130 550,130 550,160 630,160 630,130 700,130"
+    fill="none" stroke="#4A9EFF" stroke-width="2"/>
+  <line x1="260" y1="145" x2="260" y2="170" stroke="#2E3238" stroke-width="1"/>
+  <text x="248" y="134" fill="#4A9EFF" font-size="7">3.7V</text>
+  <text x="248" y="165" fill="#4A9EFF" font-size="7">0V</text>
+
+  <!-- Green channel - good -->
+  <text x="255" y="208" fill="#3DCC7E" font-size="9">Green</text>
+  <polyline points="270,230 350,230 350,200 430,200 430,230 510,230 510,200 590,200 590,230 670,230 670,200 700,200"
+    fill="none" stroke="#3DCC7E" stroke-width="2"/>
+  <line x1="260" y1="195" x2="260" y2="240" stroke="#2E3238" stroke-width="1"/>
+  <text x="248" y="204" fill="#3DCC7E" font-size="7">3.7V</text>
+  <text x="248" y="235" fill="#3DCC7E" font-size="7">0V</text>
+
+  <!-- Yellow channel - faulty -->
+  <text x="255" y="268" fill="#E05252" font-size="9">Yellow</text>
+  <text x="255" y="280" fill="#E05252" font-size="7">FAULT</text>
+  <line x1="270" y1="288" x2="700" y2="288" stroke="#E05252" stroke-width="2.5"/>
+  <text x="480" y="282" text-anchor="middle" fill="#E05252" font-size="8">stuck at ~0.15V — 100Ω to GND</text>
+  <line x1="260" y1="265" x2="260" y2="292" stroke="#2E3238" stroke-width="1"/>
+  <text x="248" y="273" fill="#E05252" font-size="7">3.7V</text>
+  <text x="248" y="291" fill="#E05252" font-size="7">0V</text>
+
+  <!-- Measurement annotations -->
+  <rect x="260" y="310" width="220" height="75" rx="6" fill="#2E3238"/>
+  <text x="370" y="328" text-anchor="middle" fill="#6B7280" font-size="9" font-weight="bold">Resistance measurements</text>
+  <text x="270" y="344" fill="#3DCC7E" font-size="9">Blue → GND:    open (∞ Ω)  ✓</text>
+  <text x="270" y="358" fill="#3DCC7E" font-size="9">Green → GND:   open (∞ Ω)  ✓</text>
+  <text x="270" y="372" fill="#E05252" font-size="9">Yellow → GND:  100 Ω       ✗</text>
+
+  <!-- Root cause -->
+  <rect x="500" y="310" width="220" height="75" rx="6" fill="#2E3238"/>
+  <text x="610" y="328" text-anchor="middle" fill="#6B7280" font-size="9" font-weight="bold">Root cause</text>
+  <text x="510" y="345" fill="#E05252" font-size="8">Chafed wire OR damaged</text>
+  <text x="510" y="359" fill="#E05252" font-size="8">open-collector Hall IC</text>
+  <text x="510" y="375" fill="#F0A500" font-size="8">Also: yellow sensor rotated</text>
+  <text x="510" y="388" fill="#F0A500" font-size="8">after reassembly → fixed</text>
+
+  <!-- Error code box -->
+  <rect x="40" y="340" width="160" height="55" rx="6" fill="#2E3238"/>
+  <text x="120" y="358" text-anchor="middle" fill="#E05252" font-size="10" font-weight="bold">Error code: E96</text>
+  <text x="120" y="374" text-anchor="middle" fill="#6B7280" font-size="8">Controller Hall error</text>
+  <text x="120" y="388" text-anchor="middle" fill="#6B7280" font-size="8">motor kicks but won't spin</text>
+</svg>

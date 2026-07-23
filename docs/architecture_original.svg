@@ -1,0 +1,67 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Consolas,monospace">
+  <rect width="800" height="480" fill="#1A1C1E"/>
+  <text x="400" y="36" text-anchor="middle" fill="#F0A500" font-size="16" font-weight="bold">Super Soco TC — Original Assumed Architecture</text>
+  <text x="400" y="56" text-anchor="middle" fill="#6B7280" font-size="11">(RS485 bus with dedicated ECU as master)</text>
+
+  <!-- Bus line -->
+  <line x1="80" y1="240" x2="720" y2="240" stroke="#2E3238" stroke-width="3"/>
+  <text x="400" y="232" text-anchor="middle" fill="#6B7280" font-size="10">RS485 bus  ·  9600 baud  ·  0xC5 5C req / 0xB6 6B rsp</text>
+
+  <!-- ECU -->
+  <rect x="60" y="170" width="130" height="80" rx="8" fill="#23262A" stroke="#F0A500" stroke-width="2"/>
+  <text x="125" y="200" text-anchor="middle" fill="#F0A500" font-size="12" font-weight="bold">ECU</text>
+  <text x="125" y="216" text-anchor="middle" fill="#6B7280" font-size="9">0xAA</text>
+  <text x="125" y="232" text-anchor="middle" fill="#6B7280" font-size="9">Bus master</text>
+  <text x="125" y="245" text-anchor="middle" fill="#6B7280" font-size="9">polls all units</text>
+  <line x1="190" y1="210" x2="220" y2="240" stroke="#F0A500" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Battery -->
+  <rect x="230" y="300" width="130" height="80" rx="8" fill="#23262A" stroke="#3DCC7E" stroke-width="2"/>
+  <text x="295" y="330" text-anchor="middle" fill="#3DCC7E" font-size="12" font-weight="bold">Battery</text>
+  <text x="295" y="346" text-anchor="middle" fill="#6B7280" font-size="9">0x5A</text>
+  <text x="295" y="362" text-anchor="middle" fill="#6B7280" font-size="9">voltage · SoC · temp</text>
+  <text x="295" y="375" text-anchor="middle" fill="#6B7280" font-size="9">cycles · activity</text>
+  <line x1="295" y1="300" x2="295" y2="240" stroke="#3DCC7E" stroke-width="1.5"/>
+
+  <!-- Controller -->
+  <rect x="390" y="300" width="130" height="80" rx="8" fill="#23262A" stroke="#4A9EFF" stroke-width="2"/>
+  <text x="455" y="330" text-anchor="middle" fill="#4A9EFF" font-size="12" font-weight="bold">Controller</text>
+  <text x="455" y="346" text-anchor="middle" fill="#6B7280" font-size="9">0xDA</text>
+  <text x="455" y="362" text-anchor="middle" fill="#6B7280" font-size="9">speed · gear · current</text>
+  <text x="455" y="375" text-anchor="middle" fill="#6B7280" font-size="9">temp · errors</text>
+  <line x1="455" y1="300" x2="455" y2="240" stroke="#4A9EFF" stroke-width="1.5"/>
+
+  <!-- Speedometer -->
+  <rect x="560" y="170" width="140" height="80" rx="8" fill="#23262A" stroke="#E05252" stroke-width="2"/>
+  <text x="630" y="200" text-anchor="middle" fill="#E05252" font-size="12" font-weight="bold">Speedometer</text>
+  <text x="630" y="216" text-anchor="middle" fill="#6B7280" font-size="9">0xBA</text>
+  <text x="630" y="232" text-anchor="middle" fill="#6B7280" font-size="9">display only</text>
+  <text x="630" y="245" text-anchor="middle" fill="#6B7280" font-size="9">receives compiled data</text>
+  <line x1="605" y1="210" x2="575" y2="240" stroke="#E05252" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- ECU arrows -->
+  <text x="195" y="188" fill="#F0A500" font-size="9">polls →</text>
+  <text x="560" y="188" fill="#E05252" font-size="9">← pushes data</text>
+
+  <!-- Motor -->
+  <rect x="390" y="80" width="130" height="60" rx="8" fill="#23262A" stroke="#9B59B6" stroke-width="2"/>
+  <text x="455" y="108" text-anchor="middle" fill="#9B59B6" font-size="12" font-weight="bold">Bosch Hub</text>
+  <text x="455" y="124" text-anchor="middle" fill="#6B7280" font-size="9">1500W BLDC</text>
+  <text x="455" y="137" text-anchor="middle" fill="#6B7280" font-size="9">Hall × 3 · Phase × 3</text>
+  <line x1="455" y1="140" x2="455" y2="300" stroke="#9B59B6" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="462" y="225" fill="#9B59B6" font-size="9">phase wires</text>
+
+  <!-- Legend -->
+  <rect x="60" y="420" width="14" height="3" fill="#F0A500"/>
+  <text x="80" y="424" fill="#6B7280" font-size="9">ECU (assumed bus master)</text>
+  <rect x="200" y="420" width="14" height="3" fill="#3DCC7E"/>
+  <text x="220" y="424" fill="#6B7280" font-size="9">Battery slave</text>
+  <rect x="310" y="420" width="14" height="3" fill="#4A9EFF"/>
+  <text x="330" y="424" fill="#6B7280" font-size="9">Controller slave</text>
+  <rect x="430" y="420" width="14" height="3" fill="#E05252"/>
+  <text x="450" y="424" fill="#6B7280" font-size="9">Display slave</text>
+  <rect x="545" y="420" width="14" height="3" fill="#9B59B6" stroke-dasharray="3,2"/>
+  <text x="565" y="424" fill="#6B7280" font-size="9">Motor (non-RS485)</text>
+
+  <text x="400" y="460" text-anchor="middle" fill="#2E3238" font-size="9">⚠ This architecture was assumed but not found in practice — see actual diagram</text>
+</svg>

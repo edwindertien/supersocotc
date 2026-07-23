@@ -1,0 +1,90 @@
+<svg viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Consolas,monospace">
+  <rect width="820" height="500" fill="#1A1C1E"/>
+  <text x="410" y="36" text-anchor="middle" fill="#F0A500" font-size="16" font-weight="bold">Super Soco TC — Actual Architecture (as found by bus analysis)</text>
+  <text x="410" y="56" text-anchor="middle" fill="#6B7280" font-size="11">Instrument panel is bus master · ECU socket present but unpopulated · two separate RS485 bus segments</text>
+
+  <!-- Bus segment 1 label -->
+  <rect x="50" y="100" width="340" height="280" rx="10" fill="none" stroke="#2E3238" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="220" y="95" text-anchor="middle" fill="#2E3238" font-size="10">Bus segment 1 (tapped in this project)</text>
+
+  <!-- Bus line 1 -->
+  <line x1="80" y1="240" x2="380" y2="240" stroke="#2E3238" stroke-width="3"/>
+  <text x="230" y="232" text-anchor="middle" fill="#6B7280" font-size="9">RS485 · 9600 baud</text>
+
+  <!-- Instrument panel / Speedometer = MASTER -->
+  <rect x="65" y="165" width="145" height="90" rx="8" fill="#23262A" stroke="#F0A500" stroke-width="2.5"/>
+  <text x="138" y="192" text-anchor="middle" fill="#F0A500" font-size="12" font-weight="bold">Instrument Panel</text>
+  <text x="138" y="208" text-anchor="middle" fill="#F0A500" font-size="9">0xBA  ★ BUS MASTER</text>
+  <text x="138" y="223" text-anchor="middle" fill="#6B7280" font-size="9">polls controller + battery</text>
+  <text x="138" y="237" text-anchor="middle" fill="#6B7280" font-size="9">displays compiled data</text>
+  <line x1="210" y1="210" x2="240" y2="240" stroke="#F0A500" stroke-width="2"/>
+
+  <!-- Controller -->
+  <rect x="100" y="310" width="130" height="80" rx="8" fill="#23262A" stroke="#4A9EFF" stroke-width="2"/>
+  <text x="165" y="338" text-anchor="middle" fill="#4A9EFF" font-size="12" font-weight="bold">Controller</text>
+  <text x="165" y="354" text-anchor="middle" fill="#6B7280" font-size="9">0xDA  (stock)</text>
+  <text x="165" y="368" text-anchor="middle" fill="#6B7280" font-size="9">speed · gear</text>
+  <text x="165" y="381" text-anchor="middle" fill="#6B7280" font-size="9">current · temp</text>
+  <line x1="165" y1="310" x2="165" y2="240" stroke="#4A9EFF" stroke-width="1.5"/>
+
+  <!-- Battery 1 -->
+  <rect x="250" y="310" width="130" height="80" rx="8" fill="#23262A" stroke="#3DCC7E" stroke-width="2"/>
+  <text x="315" y="338" text-anchor="middle" fill="#3DCC7E" font-size="12" font-weight="bold">Battery (main)</text>
+  <text x="315" y="354" text-anchor="middle" fill="#6B7280" font-size="9">0x5A</text>
+  <text x="315" y="368" text-anchor="middle" fill="#6B7280" font-size="9">voltage · SoC</text>
+  <text x="315" y="381" text-anchor="middle" fill="#6B7280" font-size="9">temp · cycles</text>
+  <line x1="315" y1="310" x2="315" y2="240" stroke="#3DCC7E" stroke-width="1.5"/>
+
+  <!-- Bus segment 2 label -->
+  <rect x="420" y="100" width="340" height="280" rx="10" fill="none" stroke="#2E3238" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="590" y="95" text-anchor="middle" fill="#2E3238" font-size="10">Bus segment 2 (tapped first — secondary battery port)</text>
+
+  <!-- Bus line 2 -->
+  <line x1="450" y1="240" x2="740" y2="240" stroke="#2E3238" stroke-width="3"/>
+  <text x="595" y="232" text-anchor="middle" fill="#6B7280" font-size="9">RS485 · 9600 baud</text>
+
+  <!-- Instrument panel ghost -->
+  <rect x="435" y="175" width="130" height="70" rx="8" fill="none" stroke="#2E3238" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="500" y="200" text-anchor="middle" fill="#2E3238" font-size="11">Instrument</text>
+  <text x="500" y="215" text-anchor="middle" fill="#2E3238" font-size="11">Panel</text>
+  <text x="500" y="230" text-anchor="middle" fill="#2E3238" font-size="9">(same master)</text>
+  <line x1="500" y1="245" x2="500" y2="240" stroke="#2E3238" stroke-width="1.5"/>
+
+  <!-- Battery 2 (second battery) -->
+  <rect x="570" y="310" width="160" height="80" rx="8" fill="#23262A" stroke="#3DCC7E" stroke-width="2"/>
+  <text x="650" y="338" text-anchor="middle" fill="#3DCC7E" font-size="12" font-weight="bold">Battery 2 (opt.)</text>
+  <text x="650" y="354" text-anchor="middle" fill="#6B7280" font-size="9">0x5A  same address</text>
+  <text x="650" y="368" text-anchor="middle" fill="#6B7280" font-size="9">45/77 charge cycles</text>
+  <text x="650" y="381" text-anchor="middle" fill="#6B7280" font-size="9">62% SoC · 65V</text>
+  <line x1="650" y1="310" x2="650" y2="240" stroke="#3DCC7E" stroke-width="1.5"/>
+
+  <!-- ECU socket (empty) -->
+  <rect x="340" y="165" width="120" height="70" rx="8" fill="#1A1C1E" stroke="#2E3238" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="400" y="194" text-anchor="middle" fill="#2E3238" font-size="11">ECU socket</text>
+  <text x="400" y="210" text-anchor="middle" fill="#2E3238" font-size="9">⊘ NOT POPULATED</text>
+  <text x="400" y="224" text-anchor="middle" fill="#2E3238" font-size="9">RS485 + power wired</text>
+
+  <!-- Motor -->
+  <rect x="100" y="68" width="145" height="68" rx="8" fill="#23262A" stroke="#9B59B6" stroke-width="2"/>
+  <text x="172" y="92" text-anchor="middle" fill="#9B59B6" font-size="12" font-weight="bold">Bosch Hub Motor</text>
+  <text x="172" y="108" text-anchor="middle" fill="#6B7280" font-size="9">1500W BLDC · 3× Hall</text>
+  <text x="172" y="121" text-anchor="middle" fill="#6B7280" font-size="9">⚠ Yellow Hall repaired</text>
+  <line x1="165" y1="136" x2="165" y2="310" stroke="#9B59B6" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Regen arrow -->
+  <path d="M 250 355 Q 290 280 250 205" stroke="#3DCC7E" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+  <text x="268" y="270" fill="#3DCC7E" font-size="8" transform="rotate(-5,268,270)">regen detected!</text>
+
+  <!-- Legend -->
+  <rect x="50" y="445" width="12" height="3" fill="#F0A500"/>
+  <text x="68" y="449" fill="#6B7280" font-size="9">★ Bus master</text>
+  <rect x="170" y="445" width="12" height="3" fill="#4A9EFF"/>
+  <text x="188" y="449" fill="#6B7280" font-size="9">Controller slave</text>
+  <rect x="300" y="445" width="12" height="3" fill="#3DCC7E"/>
+  <text x="318" y="449" fill="#6B7280" font-size="9">Battery slave</text>
+  <rect x="420" y="445" width="12" height="3" fill="#2E3238" stroke-dasharray="3,2"/>
+  <text x="438" y="449" fill="#6B7280" font-size="9">ECU (absent)</text>
+  <rect x="530" y="445" width="12" height="3" fill="#9B59B6"/>
+  <text x="548" y="449" fill="#6B7280" font-size="9">Motor (non-RS485)</text>
+  <text x="690" y="449" fill="#2E3238" font-size="9">↑ tapped here first</text>
+</svg>

@@ -1,0 +1,118 @@
+<svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" font-family="Menlo,Consolas,monospace">
+  <rect width="860" height="520" fill="#1A1C1E"/>
+  <text x="430" y="36" text-anchor="middle" fill="#F0A500" font-size="16" font-weight="bold">Super Soco TC — Target Architecture (FarDriver + Pico RS485 Bridge)</text>
+  <text x="430" y="56" text-anchor="middle" fill="#6B7280" font-size="11">Pico W acts as new bus master — replaces stock controller and ECU</text>
+
+  <!-- ── LEFT: Motor + FarDriver ── -->
+  <!-- Bosch motor -->
+  <rect x="30" y="90" width="145" height="80" rx="8" fill="#23262A" stroke="#9B59B6" stroke-width="2"/>
+  <text x="103" y="118" text-anchor="middle" fill="#9B59B6" font-size="12" font-weight="bold">Bosch Hub Motor</text>
+  <text x="103" y="134" text-anchor="middle" fill="#6B7280" font-size="9">1500W BLDC</text>
+  <text x="103" y="148" text-anchor="middle" fill="#6B7280" font-size="9">3× Hall · 3× Phase wire</text>
+  <text x="103" y="162" text-anchor="middle" fill="#6B7280" font-size="9">thermistor (white wire)</text>
+
+  <!-- Phase wires -->
+  <line x1="103" y1="170" x2="103" y2="270" stroke="#9B59B6" stroke-width="2.5"/>
+  <text x="110" y="223" fill="#9B59B6" font-size="9">U V W</text>
+  <!-- Hall wires -->
+  <line x1="140" y1="170" x2="200" y2="270" stroke="#F0A500" stroke-width="1.5"/>
+  <text x="153" y="235" fill="#F0A500" font-size="8">Hall × 3</text>
+
+  <!-- FarDriver ND72360 -->
+  <rect x="30" y="270" width="300" height="110" rx="8" fill="#23262A" stroke="#F0A500" stroke-width="2.5"/>
+  <text x="180" y="298" text-anchor="middle" fill="#F0A500" font-size="13" font-weight="bold">FarDriver ND72360</text>
+  <text x="180" y="314" text-anchor="middle" fill="#6B7280" font-size="9">60V · 190A phase · Bluetooth + TTL serial</text>
+  <!-- Outputs from FarDriver -->
+  <text x="50" y="335" fill="#4A9EFF" font-size="9">TTL serial (3.3V)</text>
+  <text x="50" y="350" fill="#4A9EFF" font-size="9">speed · gear · current</text>
+  <text x="50" y="365" fill="#4A9EFF" font-size="9">temp · errors · learn</text>
+  <text x="200" y="335" fill="#3DCC7E" font-size="9">SPD pulse output</text>
+  <text x="200" y="350" fill="#3DCC7E" font-size="9">regen (throttle roll-off</text>
+  <text x="200" y="365" fill="#3DCC7E" font-size="9">+ brake lever signal)</text>
+
+  <!-- TTL serial line to Pico -->
+  <line x1="330" y1="320" x2="420" y2="300" stroke="#4A9EFF" stroke-width="1.5"/>
+  <text x="355" y="308" fill="#4A9EFF" font-size="8">3.3V UART</text>
+
+  <!-- Battery -->
+  <rect x="30" y="420" width="200" height="80" rx="8" fill="#23262A" stroke="#3DCC7E" stroke-width="2"/>
+  <text x="130" y="448" text-anchor="middle" fill="#3DCC7E" font-size="12" font-weight="bold">Battery</text>
+  <text x="130" y="464" text-anchor="middle" fill="#6B7280" font-size="9">60V · 17S NMC</text>
+  <text x="130" y="478" text-anchor="middle" fill="#6B7280" font-size="9">RS485 → voltage · SoC · temp · cycles</text>
+  <text x="130" y="491" text-anchor="middle" fill="#6B7280" font-size="9">0x5A  (slave on RS485)</text>
+
+  <!-- Battery RS485 to Pico -->
+  <line x1="230" y1="455" x2="420" y2="400" stroke="#3DCC7E" stroke-width="1.5"/>
+  <text x="295" y="420" fill="#3DCC7E" font-size="8">RS485 poll</text>
+
+  <!-- ── CENTRE: Pico W bridge ── -->
+  <rect x="420" y="240" width="200" height="220" rx="10" fill="#23262A" stroke="#F0A500" stroke-width="3"/>
+  <text x="520" y="268" text-anchor="middle" fill="#F0A500" font-size="13" font-weight="bold">Raspberry Pi Pico W</text>
+  <text x="520" y="284" text-anchor="middle" fill="#F0A500" font-size="9">★ NEW BUS MASTER</text>
+  <line x1="430" y1="292" x2="610" y2="292" stroke="#2E3238" stroke-width="1"/>
+
+  <text x="435" y="310" fill="#6B7280" font-size="8">UART 0 ← FarDriver (3.3V TTL)</text>
+  <text x="435" y="325" fill="#6B7280" font-size="8">UART 1 ← Battery (RS485)</text>
+  <text x="435" y="340" fill="#6B7280" font-size="8">UART 2 → Instrument panel (RS485)</text>
+
+  <line x1="430" y1="350" x2="610" y2="350" stroke="#2E3238" stroke-width="1"/>
+  <text x="520" y="368" text-anchor="middle" fill="#6B7280" font-size="8">Decodes FarDriver serial</text>
+  <text x="520" y="382" text-anchor="middle" fill="#6B7280" font-size="8">Polls battery via RS485</text>
+  <text x="520" y="396" text-anchor="middle" fill="#6B7280" font-size="8">Compiles SpeedometerRequest</text>
+  <text x="520" y="410" text-anchor="middle" fill="#6B7280" font-size="8">Drives stock display at 9600 bd</text>
+
+  <line x1="430" y1="420" x2="610" y2="420" stroke="#2E3238" stroke-width="1"/>
+  <text x="520" y="438" text-anchor="middle" fill="#6B7280" font-size="8">SuperSoco485 protocol</text>
+  <text x="520" y="452" text-anchor="middle" fill="#6B7280" font-size="8">github/stprograms</text>
+
+  <!-- RS485 MAX485 modules -->
+  <rect x="445" y="460" width="150" height="28" rx="4" fill="#2E3238" stroke="#6B7280" stroke-width="1"/>
+  <text x="520" y="477" text-anchor="middle" fill="#6B7280" font-size="8">2× MAX485 RS485 modules</text>
+
+  <!-- ── RIGHT: Instrument panel + Mac ── -->
+  <!-- Instrument panel -->
+  <rect x="680" y="160" width="150" height="100" rx="8" fill="#23262A" stroke="#E05252" stroke-width="2"/>
+  <text x="755" y="188" text-anchor="middle" fill="#E05252" font-size="12" font-weight="bold">Instrument Panel</text>
+  <text x="755" y="204" text-anchor="middle" fill="#6B7280" font-size="9">0xBA</text>
+  <text x="755" y="220" text-anchor="middle" fill="#6B7280" font-size="9">speed · gear · SoC</text>
+  <text x="755" y="235" text-anchor="middle" fill="#6B7280" font-size="9">range · errors</text>
+  <text x="755" y="250" text-anchor="middle" fill="#6B7280" font-size="9">original display retained</text>
+
+  <!-- RS485 from Pico to panel -->
+  <line x1="620" y1="310" x2="680" y2="230" stroke="#E05252" stroke-width="2"/>
+  <text x="635" y="265" fill="#E05252" font-size="8">RS485</text>
+  <text x="635" y="278" fill="#E05252" font-size="8">Super Soco</text>
+  <text x="635" y="291" fill="#E05252" font-size="8">protocol</text>
+
+  <!-- Future: round display -->
+  <rect x="680" y="300" width="150" height="80" rx="8" fill="#1A1C1E" stroke="#2E3238" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="755" y="328" text-anchor="middle" fill="#2E3238" font-size="11">Circular display</text>
+  <text x="755" y="344" text-anchor="middle" fill="#2E3238" font-size="9">(future: temperatures</text>
+  <text x="755" y="358" text-anchor="middle" fill="#2E3238" font-size="9">regen · SoC)</text>
+  <text x="755" y="373" text-anchor="middle" fill="#2E3238" font-size="8">← Pico W WiFi / SPI</text>
+
+  <!-- Mac dev tools -->
+  <rect x="680" y="420" width="150" height="70" rx="8" fill="#23262A" stroke="#6B7280" stroke-width="1.5"/>
+  <text x="755" y="444" text-anchor="middle" fill="#6B7280" font-size="10" font-weight="bold">Mac dev tools</text>
+  <text x="755" y="460" text-anchor="middle" fill="#6B7280" font-size="8">supersoco_web.py</text>
+  <text x="755" y="473" text-anchor="middle" fill="#6B7280" font-size="8">fardriver_web.py</text>
+  <text x="755" y="486" text-anchor="middle" fill="#6B7280" font-size="8">Flask + browser UI</text>
+
+  <!-- Mac to FarDriver serial -->
+  <line x1="680" y1="455" x2="330" y2="355" stroke="#6B7280" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="490" y="435" fill="#6B7280" font-size="8">TTL serial (setup/diagnostics)</text>
+
+  <!-- Legend -->
+  <rect x="30" y="490" width="12" height="3" fill="#F0A500"/>
+  <text x="48" y="494" fill="#6B7280" font-size="9">New bus master</text>
+  <rect x="160" y="490" width="12" height="3" fill="#4A9EFF"/>
+  <text x="178" y="494" fill="#6B7280" font-size="9">FarDriver serial</text>
+  <rect x="290" y="490" width="12" height="3" fill="#3DCC7E"/>
+  <text x="308" y="494" fill="#6B7280" font-size="9">Battery RS485</text>
+  <rect x="410" y="490" width="12" height="3" fill="#E05252"/>
+  <text x="428" y="494" fill="#6B7280" font-size="9">Display RS485</text>
+  <rect x="540" y="490" width="12" height="3" fill="#9B59B6"/>
+  <text x="558" y="494" fill="#6B7280" font-size="9">Motor wires</text>
+  <rect x="650" y="490" width="12" height="3" fill="#2E3238" stroke-dasharray="3,2"/>
+  <text x="668" y="494" fill="#6B7280" font-size="9">Future / optional</text>
+</svg>
