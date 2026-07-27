@@ -8,7 +8,7 @@ This document is a complete handoff for a fresh conversation continuing this pro
 
 2021 Super Soco TC electric motorcycle. Replacing the stock motor controller with a **FarDriver ND72360** to enable regenerative braking. The original stock controller already had regen (detected via RS485 bus capture), but was causing thermal shutdowns at max speed.
 
-**First problem solved along the way:** Bosch hub motor Hall sensor (yellow channel, 100Ω short to GND) → E96 error. Fixed by repair and correct angular reassembly. Battery terminal corrosion also caused a no-start.
+**First problem solved along the way:** Bosch hub motor Hall sensor (yellow/center channel, 100Ω short to GND) → E96 error. Turned out to be two separate faults: the original short, then the *replacement* sensor fitted 180° rotated relative to the other two (easy mistake — nothing makes the correct orientation obvious), which reversed its supply polarity and broke that sensor too. Motor runs fine once fitted with correct orientation. Battery terminal corrosion also caused a no-start (see README for full details on both).
 
 **The big one, now resolved:** for a long stretch of this project, parameter writes (undervoltage cutoff, temperature sensor type, direction, etc.) would update the controller's RAM immediately but never survive a reset or power cycle. This is now solved — see "Write/save mechanism — RESOLVED" below. The short version: the real save command is `0x04`, not the `0x05` this project had been using; found by decompiling the actual FarDriver Android app and passively sniffing a real session with it.
 
@@ -205,6 +205,8 @@ if (BindingStat < 1 && PassOk == 1) return;        // also refuse
 // otherwise (PassOk 2 or 3, or BindingStat >= 1): the write actually goes out
 ```
 This looked very promising but was **ruled out empirically** — on this controller, `pass_ok` reads `2` continuously, meaning the real app would never hesitate to send a write here either. Kept as a preflight check ("PassOk write gate") since it's free, real information, but it is not what was blocking persistence.
+
+Digging further into the same login/binding system (`ConnectPage::BindSend`) also turned up a **hardcoded default confirmation password (`"3414"`)**, set as `Confirm_password` alongside a `Confirm_PhoneNumber` derived from `App.username`, gated behind `App.PassOk == 2` and an internal `sendconfirm` flag. Interesting, but same conclusion as above — not what was blocking persistence on this controller, since the gate it sits behind is already open.
 
 ### `ButtonSaveName_Clicked`, `GetConfirmModify` — red herrings
 
