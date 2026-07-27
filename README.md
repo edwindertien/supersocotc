@@ -118,8 +118,13 @@ The Bosch hub motor's yellow (center) Hall channel had a 100Ω short to GND, cau
 
 Worth remembering for next time: a Hall sensor replacement that seems to go in fine but causes new problems is worth checking for orientation *before* assuming it's another bad part.
 
+![wheel with lid off](docs/bosch1.jpg)
+![sensors, mid one has other orientation](docs/bosch2.jpg)
+
 ### 4. Open-collector Hall outputs need pull-ups
 The three Hall signal wires are open-collector outputs. Pull-up resistors live on the **controller side**, not on the motor PCB. The yellow channel's 100Ω short to GND was enough to defeat the pull-up and prevent the signal from reaching the supply rail.
+
+![pullup](docs/hall_sensor_fault.svg)
 
 ### 5. Battery terminal corrosion caused no-start
 A dull grey (oxidised) terminal on one battery connector was causing a high-resistance junction. At low current draw (lights, controller boot) the bike appeared to start. Under the higher current demand of motor startup, the voltage drop across the corroded joint was sufficient to trigger BMS protection. Fix: clean with 600-grit sandpaper, apply dielectric grease.
@@ -158,6 +163,10 @@ A dull grey (oxidised) terminal on one battery connector was causing a high-resi
 ## FarDriver protocol notes
 
 The full serial protocol — CRC algorithms, packet formats, the flash address map, the save/commit mechanism, the heartbeat, all of it — is documented in detail in `context.md`, cross-checked against [jackhumbert/fardriver-controllers](https://github.com/jackhumbert/fardriver-controllers) (`fardriver.hpp`, its README, and the translated official manual), the real Android app (decompiled), and a passive capture of a genuine app session. Short version: the write mechanism was correct from early on; the missing piece for months was the save command (`0x04`, not `0x05`), found by decompiling the app and sniffing a real session — see `context.md` for the full story.
+
+![Fardriver config tool](docs/fardriverWorking.jpg)
+![Fardriver parameter check](docs/fardriverParameters.jpg)
+![Fardriver sanity check](docs/fardriverCheck.jpg)
 
 ---
 
