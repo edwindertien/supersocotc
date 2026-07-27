@@ -322,7 +322,8 @@ state = {
 }
 
 speed_history:   collections.deque = collections.deque(maxlen=600)
-current_history: collections.deque = collections.deque(maxlen=600)
+current_history:      collections.deque = collections.deque(maxlen=600)
+batt_current_history: collections.deque = collections.deque(maxlen=600)
 voltage_history: collections.deque = collections.deque(maxlen=600)
 log_entries:     collections.deque = collections.deque(maxlen=300)
 
@@ -365,6 +366,7 @@ def on_telegram(tg: BaseTelegram):
         act = {0:"idle", 1:"charging", 4:"discharging"}.get(tg.activity, "?")
         s["batt_activity"] = act
         voltage_history.append((time.time(), tg.voltage))
+        batt_current_history.append((time.time(), tg.current))
         add_log(f"{label}  {tg.voltage}V  SoC={tg.soc}%  "
                 f"Temp={tg.temperature}°C  Curr={tg.current}A  "
                 f"Activity={act}  |  {hex_s}", "rx", terminal=False)
@@ -584,9 +586,10 @@ def api_log():
 def api_history():
     t0 = time.time() - 300   # last 5 minutes
     return jsonify({
-        'speed':   [[t, v] for t, v in speed_history   if t >= t0],
-        'current': [[t, v] for t, v in current_history if t >= t0],
-        'voltage': [[t, v] for t, v in voltage_history if t >= t0],
+        'speed':        [[t, v] for t, v in speed_history        if t >= t0],
+        'ctrl_current': [[t, v] for t, v in current_history      if t >= t0],
+        'batt_current': [[t, v] for t, v in batt_current_history if t >= t0],
+        'voltage':      [[t, v] for t, v in voltage_history      if t >= t0],
     })
 
 @app.route('/api/export/csv')
@@ -950,7 +953,7 @@ function updateUI(s) {
 
   // Battery current
   const bcEl = document.getElementById('d-bcurr');
-  bcEl.textContent = s.batt_curr + ' A';
+  bcEl.textContent = (typeof s.batt_curr === 'number' ? s.batt_curr.toFixed(1) : s.batt_curr) + ' A';
   bcEl.className = 'cval' + (s.batt_curr < -0.5 ? ' green' : '');
   document.getElementById('d-bact').textContent = s.batt_activity;
 
@@ -992,11 +995,13 @@ const chart = new Chart(ctx, {
   type: 'line',
   data: {
     datasets: [
-      { label:'Speed (km/h)',   borderColor:'#F0A500', backgroundColor:'transparent',
+      { label:'Speed (km/h)',      borderColor:'#F0A500', backgroundColor:'transparent',
         borderWidth:1.5, pointRadius:0, tension:0.3, data:[] },
-      { label:'Current (A)',    borderColor:'#3DCC7E', backgroundColor:'transparent',
+      { label:'Ctrl Current (A)',  borderColor:'#3DCC7E', backgroundColor:'transparent',
         borderWidth:1.2, pointRadius:0, tension:0.3, data:[] },
-      { label:'Voltage (V)',    borderColor:'#4A9EFF', backgroundColor:'transparent',
+      { label:'Batt Current (A)',  borderColor:'#E05252', backgroundColor:'transparent',
+        borderWidth:1.2, pointRadius:0, tension:0.3, data:[], borderDash:[4,2] },
+      { label:'Voltage (V)',       borderColor:'#4A9EFF', backgroundColor:'transparent',
         borderWidth:1.2, pointRadius:0, tension:0.3, data:[] },
     ]
   },
@@ -1016,8 +1021,9 @@ async function updateChart() {
   const now = Date.now() / 1000;
   const toXY = arr => arr.map(([t,v]) => ({x: t - now + 300, y: v}));
   chart.data.datasets[0].data = toXY(h.speed);
-  chart.data.datasets[1].data = toXY(h.current);
-  chart.data.datasets[2].data = toXY(h.voltage);
+  chart.data.datasets[1].data = toXY(h.ctrl_current);
+  chart.data.datasets[2].data = toXY(h.batt_current);
+  chart.data.datasets[3].data = toXY(h.voltage);
   chart.update('none');
 }
 setInterval(updateChart, 2000);

@@ -1,0 +1,239 @@
+# fardriver_silent_monitor -- PASSIVE, sends nothing
+# port=/dev/tty.usbserial-AD026699 baud=19200 label='RX-from-fardriver'
+# started 2026-07-27T20:55:20.796938
+[20:55:21.228] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:22.259] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:23.502] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:24.573] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:25.580] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:26.918] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:28.247] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:29.268] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:55:30.337] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+# stopped (Ctrl-C)
+# fardriver_silent_monitor -- PASSIVE, sends nothing
+# port=/dev/tty.usbserial-AD026699 baud=19200 label='RX-from-fardriver2'
+# started 2026-07-27T20:58:14.098050
+[20:58:29.298] [TEXT  ] '\r\nSOK\r\n'
+[20:58:29.299] [???   ]  | raw: 00
+[20:58:30.650] [TEXT  ] '\\+VERSION='
+[20:58:30.650] [???   ]  | raw: 01
+[20:58:30.650] [???   ]  | raw: 08
+[20:58:30.650] [TEXT  ] 'k'
+[20:58:30.650] [???   ]  | raw: 19
+[20:58:30.650] [TEXT  ] '9'
+[20:58:30.650] [???   ]  | raw: A4
+[20:58:30.651] [???   ]  | raw: E2
+[20:58:30.651] [TEXT  ] '~'
+[20:58:30.651] [???   ]  | raw: 86
+[20:58:30.651] [???   ]  | raw: 97
+[20:58:30.706] [???   ]  | raw: D8
+[20:58:30.706] [???   ]  | raw: E6
+[20:58:30.706] [TEXT  ] '{'
+[20:58:30.706] [???   ]  | raw: FD
+[20:58:30.706] [???   ]  | raw: B1
+[20:58:30.759] [TEXT  ] 'g\r\n+PAWD='
+[20:58:30.759] [???   ]  | raw: CE
+[20:58:30.759] [???   ]  | raw: 1D
+[20:58:30.759] [TEXT  ] '\r'
+[20:58:30.759] [???   ]  | raw: 8D
+[20:58:30.759] [TEXT  ] '9'
+[20:58:30.760] [???   ]  | raw: 9F
+[20:58:30.760] [???   ]  | raw: D3
+[20:58:30.760] [???   ]  | raw: F3
+[20:58:30.760] [???   ]  | raw: 86
+[20:58:30.760] [???   ]  | raw: 91
+[20:58:30.760] [???   ]  | raw: F6
+[20:58:30.760] [TEXT  ] 'B|w'
+[20:58:30.760] [???   ]  | raw: 85
+[20:58:30.760] [???   ]  | raw: E1
+[20:58:31.510] [TEXT  ] '+CONN=23638270E669\r\n'
+[20:58:31.511] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:32.316] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:33.290] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:34.137] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:34.890] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:35.692] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:36.661] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:38.760] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:39.891] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:41.078] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:41.941] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:42.364] [WRITE ] addr=0x0B value=0x5050 (=20560)  | raw: AA C6 0B 0B 50 50 CF 37
+[20:58:43.385] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:44.624] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:45.763] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:46.901] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:47.853] [WRITE ] addr=0x0B value=0x5060 (=20576)  | raw: AA C6 0B 0B 60 50 DB 37
+[20:58:48.877] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:49.943] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:51.012] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:52.090] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:52.841] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:53.641] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:54.443] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:55.301] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:56.160] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:56.859] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:57.820] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:58.725] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:58:59.422] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:00.226] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:01.023] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:02.035] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:03.108] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:03.956] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:04.822] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:05.576] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:06.056] [WRITE ] addr=0x1F value=0x0212 (=530)  | raw: AA C6 1F 1F 12 02 3B 9E
+[20:59:07.076] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:08.198] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:09.224] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:10.505] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:11.368] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:12.443] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:13.131] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:13.398] [WRITE ] addr=0x1F value=0x021C (=540)  | raw: AA C6 1F 1F 1C 02 3F FE
+[20:59:14.472] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:15.610] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:16.685] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:17.699] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:18.722] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:19.789] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:20.641] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:20.957] [???   ]  | raw: AA  (unmatched 0xAA, resyncing)
+[20:59:20.958] [???   ]  | raw: CA
+[20:59:20.958] [TEXT  ] '""'
+[20:59:20.958] [???   ]  | raw: 1A
+[20:59:20.958] [???   ]  | raw: 07
+[20:59:20.958] [???   ]  | raw: 1B
+[20:59:20.958] [???   ]  | raw: 12
+[20:59:20.958] [TEXT  ] ';'
+[20:59:20.958] [???   ]  | raw: 13
+[20:59:20.958] [TEXT  ] '.'
+[20:59:20.958] [???   ]  | raw: D0
+[20:59:20.958] [SYSCMD] cmd=0x04 (get CAN parameters?)  | raw: AA C6 A0 A0 88 04 C5 0C
+[20:59:22.032] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:23.036] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:24.199] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:25.265] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:26.174] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:27.513] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:28.645] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:29.447] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:30.342] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:30.343] [WRITE ] addr=0x0B value=0xD060 (=53344)  | raw: AA C6 0B 0B 60 D0 DA 97
+[20:59:30.932] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:31.415] [WRITE ] addr=0x0B value=0xD060 (=53344)  | raw: AA C6 0B 0B 60 D0 DA 97
+[20:59:32.011] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:33.127] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:33.982] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:34.996] [???   ]  | raw: AA  (unmatched 0xAA, resyncing)
+[20:59:34.996] [???   ]  | raw: CA
+[20:59:34.997] [TEXT  ] '""'
+[20:59:34.997] [???   ]  | raw: 1A
+[20:59:34.997] [???   ]  | raw: 07
+[20:59:34.997] [???   ]  | raw: 1B
+[20:59:34.997] [???   ]  | raw: 12
+[20:59:34.997] [TEXT  ] ';!'
+[20:59:34.997] [???   ]  | raw: AF
+[20:59:34.997] [???   ]  | raw: 05
+[20:59:34.997] [SYSCMD] cmd=0x04 (get CAN parameters?)  | raw: AA C6 A0 A0 88 04 C5 0C
+[20:59:35.596] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:36.999] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:38.233] [TEXT  ] '\r\nSOK\r\n'
+[20:59:38.233] [???   ]  | raw: 00
+[20:59:41.952] [TEXT  ] '\\+CONN=23638270E669\r\n'
+[20:59:41.953] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:42.710] [WRITE ] addr=0x0B value=0x5060 (=20576)  | raw: AA C6 0B 0B 60 50 DB 37
+[20:59:43.410] [WRITE ] addr=0x0B value=0x5060 (=20576)  | raw: AA C6 0B 0B 60 50 DB 37
+[20:59:44.111] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:45.076] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:45.833] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:46.202] [???   ]  | raw: AA  (unmatched 0xAA, resyncing)
+[20:59:46.202] [???   ]  | raw: CA
+[20:59:46.202] [TEXT  ] '""'
+[20:59:46.202] [???   ]  | raw: 1A
+[20:59:46.202] [???   ]  | raw: 07
+[20:59:46.202] [???   ]  | raw: 1B
+[20:59:46.202] [???   ]  | raw: 12
+[20:59:46.202] [TEXT  ] ';,n'
+[20:59:46.203] [???   ]  | raw: C0
+[20:59:46.203] [SYSCMD] cmd=0x04 (get CAN parameters?)  | raw: AA C6 A0 A0 88 04 C5 0C
+[20:59:46.968] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:49.061] [TEXT  ] '\r\nSOK\r\n'
+[20:59:49.061] [???   ]  | raw: 00
+[20:59:49.112] [TEXT  ] '\\+VERSION='
+[20:59:49.112] [???   ]  | raw: 01
+[20:59:49.112] [???   ]  | raw: 08
+[20:59:49.112] [TEXT  ] 'k'
+[20:59:49.112] [???   ]  | raw: 19
+[20:59:49.112] [TEXT  ] '9'
+[20:59:49.112] [???   ]  | raw: A4
+[20:59:49.112] [???   ]  | raw: E2
+[20:59:49.113] [TEXT  ] '~'
+[20:59:49.113] [???   ]  | raw: 86
+[20:59:49.113] [???   ]  | raw: 97
+[20:59:49.113] [???   ]  | raw: D8
+[20:59:49.113] [???   ]  | raw: E6
+[20:59:49.113] [TEXT  ] '{'
+[20:59:49.113] [???   ]  | raw: FD
+[20:59:49.113] [???   ]  | raw: B1
+[20:59:49.219] [TEXT  ] 'g\r\n+PAWD='
+[20:59:49.219] [???   ]  | raw: CE
+[20:59:49.219] [???   ]  | raw: 1D
+[20:59:49.219] [TEXT  ] '\r'
+[20:59:49.219] [???   ]  | raw: 8D
+[20:59:49.219] [TEXT  ] '9'
+[20:59:49.219] [???   ]  | raw: 9F
+[20:59:49.219] [???   ]  | raw: D3
+[20:59:49.219] [???   ]  | raw: F3
+[20:59:49.220] [???   ]  | raw: 86
+[20:59:49.220] [???   ]  | raw: 91
+[20:59:49.220] [???   ]  | raw: F6
+[20:59:49.220] [TEXT  ] 'B|w'
+[20:59:49.220] [???   ]  | raw: 85
+[20:59:49.220] [???   ]  | raw: E1
+[20:59:49.274] [TEXT  ] '+PAWD='
+[20:59:49.274] [???   ]  | raw: CE
+[20:59:49.274] [???   ]  | raw: 1D
+[20:59:49.274] [TEXT  ] '\r'
+[20:59:49.274] [???   ]  | raw: 8D
+[20:59:49.274] [TEXT  ] '9'
+[20:59:49.274] [???   ]  | raw: 9F
+[20:59:49.274] [???   ]  | raw: D3
+[20:59:49.274] [???   ]  | raw: F3
+[20:59:49.274] [???   ]  | raw: 86
+[20:59:49.274] [???   ]  | raw: 91
+[20:59:49.274] [???   ]  | raw: F6
+[20:59:49.274] [TEXT  ] 'B|w'
+[20:59:49.274] [???   ]  | raw: 85
+[20:59:49.274] [???   ]  | raw: E1
+[20:59:49.327] [TEXT  ] '+PAWD='
+[20:59:49.327] [???   ]  | raw: CE
+[20:59:49.328] [???   ]  | raw: 1D
+[20:59:49.328] [TEXT  ] '\r'
+[20:59:49.328] [???   ]  | raw: 8D
+[20:59:49.328] [TEXT  ] '9'
+[20:59:49.328] [???   ]  | raw: 9F
+[20:59:49.328] [???   ]  | raw: D3
+[20:59:49.328] [???   ]  | raw: F3
+[20:59:49.328] [???   ]  | raw: 86
+[20:59:49.328] [???   ]  | raw: 91
+[20:59:49.328] [???   ]  | raw: F6
+[20:59:49.328] [TEXT  ] 'B|w'
+[20:59:49.328] [???   ]  | raw: 85
+[20:59:49.328] [???   ]  | raw: E1
+[20:59:56.680] [TEXT  ] '+CONN=23638270E669\r\n'
+[20:59:56.681] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:57.157] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:59.468] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[20:59:59.683] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:00.283] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:01.352] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:02.474] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:03.697] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:05.035] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:06.058] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+[21:00:07.193] [SENDCMD] command=0x13 sub=0x07 v1=9 v2=111 (?)  | raw: AA 13 EC 07 09 6F 28 D7
+# stopped (Ctrl-C)
