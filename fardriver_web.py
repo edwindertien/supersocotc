@@ -140,15 +140,23 @@ def write_param(flash_addr: int, value_u16: int) -> bytes:
     ca, cb = _crc(raw)
     return raw + bytes([ca, cb])
 
-def write_word_0x0B(temp_sensor: int = None, direction: int = None) -> bytes:
+def write_word_0x0B(temp_sensor: int = None, direction: int = None,
+                     brake_config: int = None) -> bytes:
     """
     Read-modify-write for packed word 0x0B (Addr06 block, bytes 10-11 of the
     12-byte payload). This word packs SEVERAL unrelated settings together:
-      byte10 (word low byte):  BrakeConfig:4 | TempSensor:3 (bits4-6) | PhaseExchange:1 (bit7)
+      byte10 (word low byte):  BrakeConfig:4 (bits0-3) | TempSensor:3 (bits4-6) | PhaseExchange:1 (bit7)
       byte11 (word high byte): SlowDown:3 | PC13Config:1 | CurrAntiTheft:1 | ParkConfig:2 (bits5-6) | Direction:1 (bit7)
     Verified by compiling the real jackhumbert/fardriver-controllers fardriver.hpp
     struct with g++ and reading actual offsetof()/byte-layout results — do NOT
     trust the header's inline "// 0x.." comments for this block, they're wrong.
+
+    brake_config bit position (0-3) and the real app's exact read-modify-write
+    logic were independently confirmed by decompiling ProControlPage's
+    BrakeConfig_SelectedIndexChanged handler: it does
+    `data[4] = (cfg11l & 0xF0) | selected_index` -- i.e. preserves the upper
+    nibble (TempSensor/PhaseExchange) and only touches bits0-3. Same thing
+    this function already did for temp_sensor/direction, just one more field.
 
     Naively overwriting the whole word (as the old temp_sensor write did) also
     stomps BrakeConfig/PhaseExchange/SlowDown/PC13Config/CurrAntiTheft/ParkConfig
@@ -162,12 +170,14 @@ def write_word_0x0B(temp_sensor: int = None, direction: int = None) -> bytes:
     raw = _block_cache.get(0x06)
     if raw is None or len(raw) < 12:
         raise RuntimeError("no live 0x06 block cached yet — wait for data to "
-                            "start streaming before writing temp_sensor or direction "
-                            "(needed to safely preserve the other settings packed "
-                            "into the same word)")
+                            "start streaming before writing temp_sensor, direction, "
+                            "or brake_config (needed to safely preserve the other "
+                            "settings packed into the same word)")
     b10, b11 = raw[10], raw[11]
     if temp_sensor is not None:
         b10 = (b10 & ~0x70) | ((temp_sensor & 0x07) << 4)
+    if brake_config is not None:
+        b10 = (b10 & ~0x0F) | (brake_config & 0x0F)
     if direction is not None:
         b11 = (b11 & ~0x80) | ((1 if direction else 0) << 7)
     word_val = b10 | (b11 << 8)
@@ -267,6 +277,21 @@ PASSWORD_STATUS_NAMES = {
     0: 'Password-protected — Login required to modify',
     1: 'Password-protected (alt) — Login required to modify',
     2: 'No password — free to modify',
+}
+
+# Real UI labels, pulled directly from the decompiled Android app
+# (ProControlPage::BrakeConfig_SelectedIndexChanged) -- these are the actual
+# English strings the real app shows for this exact setting, not a guess
+# from the header's enum names. "P+" isn't spelled out anywhere in the app's
+# English strings; likely a modifier on the same Ground/Float pairing, exact
+# meaning of "P" not confirmed.
+# Bit position (word 0x0B, low byte, bits0-3) confirmed the same way.
+BRAKE_CONFIG_NAMES = {
+    0: '0 — Stop Valid (brake active when signal connects to ground)',
+    1: '1 — Inverse Stop (brake active when signal floats/disconnects)',
+    2: '2 — P+Stop',
+    3: '3 — P+Inverse Stop',
+    4: '4 — Disabled',
 }
 
 # Verify factory reset CRC matches known-good from README
@@ -1081,6 +1106,7 @@ def api_settings():
     d = asdict(settings)
     d['temp_sensor_names'] = TEMP_SENSOR_NAMES
     d['password_status_names'] = PASSWORD_STATUS_NAMES
+    d['brake_config_names'] = BRAKE_CONFIG_NAMES
     return jsonify(d)
 
 @app.route('/api/preflight')
@@ -1371,7 +1397,7 @@ def api_write():
         return jsonify({'ok': False, 'error': 'value required'}), 400
 
     # ── Packed-word params (share word 0x0B) — read-modify-write ───────────
-    if param in ('temp_sensor', 'direction'):
+    if param in ('temp_sensor', 'direction', 'brake_config'):
         try:
             if param == 'temp_sensor':
                 ival = int(value)
@@ -1379,10 +1405,16 @@ def api_write():
                     return jsonify({'ok': False, 'error': 'temp_sensor out of range [0-7]'}), 400
                 pkt = write_word_0x0B(temp_sensor=ival)
                 disp = str(ival)
-            else:  # direction
+            elif param == 'direction':
                 ival = 1 if int(value) else 0
                 pkt = write_word_0x0B(direction=ival)
                 disp = 'Reverse' if ival else 'Forward'
+            else:  # brake_config
+                ival = int(value)
+                if not (0 <= ival <= 4):
+                    return jsonify({'ok': False, 'error': 'brake_config out of range [0-4]'}), 400
+                pkt = write_word_0x0B(brake_config=ival)
+                disp = BRAKE_CONFIG_NAMES.get(ival, str(ival))
         except RuntimeError as e:
             return jsonify({'ok': False, 'error': str(e)}), 400
 
@@ -1869,6 +1901,39 @@ HTML = r"""<!DOCTYPE html>
   </div>
 
   <div class="edit-section">
+    <h3>Brake Signal Mode</h3>
+    <p style="font-size:0.81rem;color:var(--muted);margin-bottom:10px;line-height:1.5">
+      Confirmed by decompiling the real app (<code>ProControlPage::BrakeConfig_SelectedIndexChanged</code>) —
+      same packed word 0x0B as Temperature Sensor above, bits 0-3. Labels are
+      the app's own English strings, not a guess ("P+" isn't spelled out
+      anywhere, exact meaning not confirmed).
+      <br><br>
+      <strong>Worth checking your wiring before changing this:</strong> this
+      appears to be the <em>only</em> brake-polarity setting on this
+      controller — nothing suggests there's a second, independent one. If
+      your handbrake and parking-button/kickstand signal are combined onto
+      the same physical input with opposite electrical behavior (one
+      high-side, one low-side), no single setting here can be correct for
+      both at once — that combination needs fixing in the wiring itself
+      (e.g. a small inverter/relay on one of the two), not just software.
+    </p>
+    <div class="edit-row">
+      <span class="edit-label">Brake Mode</span>
+      <span class="edit-current" id="ev-brake_config">—</span>
+      <select class="edit-input" id="ei-brake_config" style="width:280px" onchange="this.dataset.touched='1'">
+        <option value="0">0 — Stop Valid</option>
+        <option value="1">1 — Inverse Stop</option>
+        <option value="2">2 — P+Stop</option>
+        <option value="3">3 — P+Inverse Stop</option>
+        <option value="4">4 — Disabled</option>
+      </select>
+      <span class="edit-unit"></span>
+      <button class="edit-save" onclick="writeBrakeConfig()">Save</button>
+      <span class="edit-msg" id="em-brake_config"></span>
+    </div>
+  </div>
+
+  <div class="edit-section">
     <h3>Motor Direction</h3>
     <p style="font-size:0.81rem;color:var(--muted);margin-bottom:10px;line-height:1.5">
       Flips forward/reverse sense electrically — no phase-wire swap needed.
@@ -2311,6 +2376,14 @@ async function updateEditCurrentValues() {
     dirEl.textContent = s.direction ? '1 — Reverse' : '0 — Forward';
     if (dirSel && !dirSel.dataset.touched) dirSel.value = String(s.direction);
   }
+  // Update brake_config dropdown separately — same "don't clobber" rule
+  const bcEl = document.getElementById('ev-brake_config');
+  const bcSel = document.getElementById('ei-brake_config');
+  if (bcEl && s.brake_config_names) {
+    const bidx = s.brake_config !== undefined ? s.brake_config : 0;
+    bcEl.textContent = s.brake_config_names[bidx] || String(bidx);
+    if (bcSel && !bcSel.dataset.touched) bcSel.value = String(bidx);
+  }
   for (const [k, v] of Object.entries(map)) {
     const el = document.getElementById('ev-' + k);
     if (el && v !== undefined) {
@@ -2390,6 +2463,31 @@ async function writeDirection() {
     if (d.ok) {
       const label = val === 1 ? 'Reverse' : 'Forward';
       msg.textContent = `✓ sent ${label} — controller will restart, check back in ~15s`;
+      msg.style.color = 'var(--green)';
+      setTimeout(updateEditCurrentValues, 13000);
+    } else {
+      msg.textContent = '✗ ' + d.error;
+      msg.style.color = 'var(--red)';
+    }
+  } catch(e) {
+    msg.textContent = '✗ ' + e; msg.style.color='var(--red)';
+  }
+}
+
+async function writeBrakeConfig() {
+  const sel = document.getElementById('ei-brake_config');
+  const msg = document.getElementById('em-brake_config');
+  const val = parseInt(sel.value);
+  msg.textContent = '…sending'; msg.style.color='var(--muted)';
+  try {
+    const r = await fetch('/api/write', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({param: 'brake_config', value: val})
+    });
+    const d = await r.json();
+    if (d.ok) {
+      msg.textContent = `✓ sent mode ${val} — controller will restart, check back in ~15s`;
       msg.style.color = 'var(--green)';
       setTimeout(updateEditCurrentValues, 13000);
     } else {
